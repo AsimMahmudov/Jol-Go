@@ -3,6 +3,7 @@ import 'package:jol_go/app/theme/app_colors.dart';
 import 'package:jol_go/app/theme/app_text_styles.dart';
 import 'package:jol_go/core/widgets/avatar.dart';
 import 'package:jol_go/data/models/user.dart';
+import 'dart:io';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key, required this.user, required this.onEditTap});
@@ -18,7 +19,11 @@ class ProfileHeader extends StatelessWidget {
         bottom: false,
         child: Row(
           children: [
-            Avatar(initials: user.initials, size: 64),
+            Avatar(
+              initials: user.initials,
+              size: 64,
+              photo: user.photoPath == null ? null : File(user.photoPath!),
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(

@@ -69,8 +69,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Column(
                   children: [
                     ProfileHeader(
-                      user: mockUser,
-                      onEditTap: () => context.push('profile/edit'),
+                      user: currentUser,
+                      onEditTap: () async {
+                        await context.push('/profile/edit');
+                        if (mounted) setState(() {});
+                      },
                     ),
                     if (booking != null)
                       Padding(

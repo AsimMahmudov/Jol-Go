@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jol_go/app/theme/app_colors.dart';
 import 'package:jol_go/app/theme/app_text_styles.dart';
@@ -26,9 +27,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   @override
   void initState() {
     super.initState();
-    _firstNameController = TextEditingController(text: mockUser.firstName);
-    _lastNameController = TextEditingController(text: mockUser.lastName);
-    _phoneController = TextEditingController(text: mockUser.phone);
+    _firstNameController = TextEditingController(text: currentUser.firstName);
+    _lastNameController = TextEditingController(text: currentUser.lastName);
+    _phoneController = TextEditingController(text: currentUser.phone);
+    final photoPath = currentUser.photoPath;
+    _photo = photoPath == null ? null : File(photoPath);
   }
 
   @override
@@ -40,10 +43,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
 
   void _save() {
-    debugPrint('Имя: ${_firstNameController.text}');
-    debugPrint('Фамилия: ${_lastNameController.text}');
-    debugPrint('Телефон: ${_phoneController.text}');
-    debugPrint('Фото: ${_photo?.path ?? 'нет'}');
+    final firstName = _firstNameController.text.trim();
+    final lastName = _lastNameController.text.trim();
+    final phone = _phoneController.text.trim();
+
+    if (firstName.isEmpty || lastName.isEmpty || phone.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Заполните имя, фамилию и телефон')),
+      );
+      return;
+    }
+
+    currentUser = currentUser.copyWith(
+      firstName: firstName,
+      lastName: lastName,
+      phone: phone,
+      photoPath: _photo?.path,
+      removePhoto: _photo == null,
+    );
+    context.pop();
   }
 
   Future<void> _pickPhoto() async {

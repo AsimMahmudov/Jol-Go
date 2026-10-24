@@ -13,6 +13,8 @@ const mockUser = User(
   phone: '+996 708 771 849',
 );
 
+var currentUser = mockUser;
+
 const mockCities = [
   City(id: 'bishkek', name: 'Бишкек', region: 'Чуйская область'),
   City(id: 'osh', name: 'Ош', region: 'Ошская область'),
