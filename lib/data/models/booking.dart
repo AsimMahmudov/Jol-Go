@@ -1,7 +1,7 @@
 import 'package:jol_go/data/models/trip.dart';
 
 enum BookingStatus {
-  pending('Ожидает подтверждения'),
+  pending('Ожидании'),
   confirmed('Подтверждена'),
   cancelled('Отменена');
 

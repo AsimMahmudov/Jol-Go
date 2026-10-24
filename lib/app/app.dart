@@ -10,7 +10,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Jol Go',
+      title: 'JolGo',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       scrollBehavior: const MaterialScrollBehavior().copyWith(

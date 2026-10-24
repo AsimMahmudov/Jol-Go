@@ -41,7 +41,7 @@ class AppTheme {
       labelTextStyle: WidgetStateProperty.resolveWith((states) {
         final isSelected = states.contains(WidgetState.selected);
         return AppTextStyles.body.copyWith(
-          fontSize: 13,
+          fontSize: 11,
           color: isSelected ? AppColors.textPrimary : AppColors.textSecondary,
           fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
         );
